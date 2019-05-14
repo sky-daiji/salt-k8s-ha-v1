@@ -1,12 +1,12 @@
 # SaltStack自动化部署HA-Kubernetes
-- 本项目在GitHub上，会不定期更新，大家也可以提交ISSUE，地址为：`https://github.com/skymyyang/salt-k8s-ha`
-- SaltStack自动化部署 `Kubernetes v1.12.5` 版本（支持HA、TLS双向认证、RBAC授权、Flannel网络、ETCD集群、Kuber-Proxy使用LVS等）。
-- SaltStack自动化部署 `Kubernetes v1.13.4` 版本，请切换到 `1.13-Release` 分支。
+- 本项目在GitHub上，会不定期更新，大家也可以提交ISSUE，地址为：`https://github.com/sky-daiji/salt-k8s-ha`
+- SaltStack自动化部署 `Kubernetes v1.13.6` 版本（支持HA、TLS双向认证、RBAC授权、Flannel网络、ETCD集群、Kuber-Proxy使用LVS等）。
 
-## 版本明细：Release-v1.12.5
+
+## 版本明细：Release-v1.13.6
 - 测试通过系统：CentOS 7.6
 - salt-ssh:     salt-ssh 2018.3.3 (Oxygen)
-- Kubernetes：  v1.12.5
+- Kubernetes：  v1.13.6
 - Etcd:         v3.3.10
 - Docker:       docker-ce-18.06.0.ce-3.el7
 - Flannel：     v0.10.0
@@ -25,7 +25,7 @@ IP地址 | Hostname | 最小配置 | Kernel Version
 1. 使用Salt Grains进行角色定义，增加灵活性。
 2. 使用Salt Pillar进行配置项管理，保证安全性。
 3. 使用Salt SSH执行状态，不需要安装Agent，保证通用性。
-4. 使用Kubernetes当前稳定版本v1.12.5，保证稳定性。
+4. 使用Kubernetes当前稳定版本v1.13.6，保证稳定性。
 5. 使用HaProxy和keepalived来保证集群的高可用。
 
 ## 技术交流QQ群（加群请备注来源于Github）：
@@ -113,28 +113,28 @@ linux-node4
 2.2 获取本项目代码，并放置在 `/srv` 目录
 
 ```bash
-[root@linux-node1 ~]# git clone https://github.com/skymyyang/salt-k8s-ha.git
+[root@linux-node1 ~]# git clone https://github.com/sky-daiji/salt-k8s-ha.git
 [root@linux-node1 ~]# cd salt-k8s-ha/
 [root@linux-node1 ~]# mv * /srv/
 [root@linux-node1 srv]# /bin/cp /srv/roster /etc/salt/roster
 [root@linux-node1 srv]# /bin/cp /srv/master /etc/salt/master
 ```
 
-2.4 下载二进制文件，也可以自行官方下载，为了方便国内用户访问，请在百度云盘下载,下载k8s-v1.12.5-auto.zip。
+2.4 下载二进制文件，也可以自行官方下载，为了方便国内用户访问，请在百度云盘下载,下载k8s-v1.13.6-auto.zip。
 下载完成后，将文件移动到 `/srv/salt/k8s/` 目录下，并解压，注意是 `files` 目录在 `/srv/salt/k8s/`目录下。
 Kubernetes二进制文件下载地址： `https://pan.baidu.com/s/1Ag2ocpVmkg-uEoV13A7HFw`
 
 ```bash
 [root@linux-node1 ~]# cd /srv/salt/k8s/
-[root@linux-node1 k8s]# unzip k8s-v1.12.5-auto.zip
-[root@linux-node1 k8s]# rm -f k8s-v1.12.5-auto.zip
+[root@linux-node1 k8s]# unzip k8s-v1.13.6-auto.zip
+[root@linux-node1 k8s]# rm -f k8s-v1.13.6-auto.zip
 [root@linux-node1 k8s]# ls -l files/
 total 0
 drwxr-xr-x 2 root root  94 Jan 18 19:19 cfssl-1.2
 drwxr-xr-x 2 root root 195 Jan 18 19:19 cni-plugins-amd64-v0.7.4
 drwxr-xr-x 3 root root 123 Jan 18 19:19 etcd-v3.3.10-linux-amd64
 drwxr-xr-x 2 root root  47 Jan 18 19:19 flannel-v0.10.0-linux-amd64
-drwxr-xr-x 3 root root  17 Jan 18 19:19 k8s-v1.12.5
+drwxr-xr-x 3 root root  17 Jan 18 19:19 k8s-v1.13.6
 
 ```
 
@@ -295,10 +295,10 @@ etcd-1               Healthy   {"health":"true"}
 etcd-0               Healthy   {"health":"true"}  
 [root@k8s-m1 ~]# kubectl get node
 NAME          STATUS   ROLES    AGE   VERSION
-linux-node1   Ready    master   14m   v1.12.5
-linux-node2   Ready    master   24m   v1.12.5
-linux-node3   Ready    master   24m   v1.12.5
-linux-node4   Ready    node     30m   v1.12.5
+linux-node1   Ready    master   14m   v1.13.6
+linux-node2   Ready    master   24m   v1.13.6
+linux-node3   Ready    master   24m   v1.13.6
+linux-node4   Ready    node     30m   v1.13.6
 ```
 ## 7.测试Kubernetes集群和Flannel网络
 
@@ -422,6 +422,5 @@ kube-proxy-zgg6t          1/1     Running   2          16h
 ```
 #### 如果你觉得这个项目不错，欢迎各位打赏，你的打赏是对我们的认可，是我们的动力。
 
-![支付宝支付](https://skymyyang.github.io/img/zfb3.png)
 
 ![微信支付](https://skymyyang.github.io/img/wx1.png)
