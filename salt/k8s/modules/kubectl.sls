@@ -6,7 +6,7 @@
 # Description:  Kubernetes kubectl
 #******************************************
 
-{% set k8s_version = "k8s-v1.12.5" %}
+{% set k8s_version = "k8s-v1.13.6" %}
 
 kubectl-admin-csr:
   file.managed:
@@ -42,4 +42,3 @@ kubectl-admin-context:
 kubectl-admin-use:
   cmd.run:
     - name: cd /opt/kubernetes/cfg && /opt/kubernetes/bin/kubectl config use-context kubernetes --kubeconfig=kubectl.kubeconfig && mkdir -p ~/.kube && /bin/cp /opt/kubernetes/cfg/kubectl.kubeconfig ~/.kube/config
-

@@ -6,7 +6,7 @@
 # Description:  Kubernetes Scheduler
 #******************************************
 
-{% set k8s_version = "k8s-v1.12.5" %}
+{% set k8s_version = "k8s-v1.13.6" %}
 
 
 kube-scheduler-csr-json:

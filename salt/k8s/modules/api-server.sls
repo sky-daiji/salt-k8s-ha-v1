@@ -6,7 +6,7 @@
 # Description:  Kubernetes API Server
 #******************************************
 
-{% set k8s_version = "k8s-v1.12.5" %}
+{% set k8s_version = "k8s-v1.13.6" %}
 
 kube-api-server-csr-json:
   file.managed:
@@ -76,7 +76,7 @@ kube-apiserver-service:
   cmd.run:
     - name: systemctl daemon-reload
   service.running:
-    - name: kube-apiserver 
+    - name: kube-apiserver
     - enable: True
     - watch:
       - file: kube-apiserver-service

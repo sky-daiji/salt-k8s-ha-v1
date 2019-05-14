@@ -6,7 +6,7 @@
 # # Description:  Kubernetes Proxy
 # #******************************************
 
-{% set k8s_version = "k8s-v1.12.5" %}
+{% set k8s_version = "k8s-v1.13.6" %}
 
 include:
   - k8s.modules.cni
@@ -80,7 +80,7 @@ kube-proxy-service:
   pkg.installed:
     - names:
       - ipvsadm
-      - ipset 
+      - ipset
       - conntrack-tools
   service.running:
     - name: kube-proxy

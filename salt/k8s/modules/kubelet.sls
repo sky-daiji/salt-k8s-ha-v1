@@ -6,7 +6,7 @@
 # Description:  Kubernetes Node kubelet
 #******************************************
 
-{% set k8s_version = "k8s-v1.12.5" %}
+{% set k8s_version = "k8s-v1.13.6" %}
 
 
 include:
@@ -71,7 +71,7 @@ kubelet-service:
     {% endif %}
     - defaults:
         HOST_NAME: {{ pillar['HOST_NAME'] }}
-        
+
   cmd.run:
     - name: systemctl daemon-reload
   service.running:

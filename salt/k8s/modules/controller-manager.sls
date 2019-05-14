@@ -5,7 +5,7 @@
 # Organization: skymyyyang.github.io
 # Description:  Kubernetes Controller Manager
 #********************************************
-{% set k8s_version = "k8s-v1.12.5" %}
+{% set k8s_version = "k8s-v1.13.6" %}
 
 
 
@@ -49,7 +49,7 @@ kubectl-controller-manager-context:
 
 kubectl-controller-manager-use:
   cmd.run:
-    - name: cd /opt/kubernetes/cfg && /opt/kubernetes/bin/kubectl config use-context system:kube-controller-manager --kubeconfig=kube-controller-manager.kubeconfig 
+    - name: cd /opt/kubernetes/cfg && /opt/kubernetes/bin/kubectl config use-context system:kube-controller-manager --kubeconfig=kube-controller-manager.kubeconfig
 
 
 kube-controller-manager-service:
