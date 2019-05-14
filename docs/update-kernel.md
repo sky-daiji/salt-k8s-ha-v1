@@ -131,7 +131,7 @@ $ systemctl enable --now systemd-modules-load.service
 
 ```bash
 $ cat <<EOF > /etc/sysctl.d/k8s.conf
-# https://github.com/moby/moby/issues/31208 
+# https://github.com/moby/moby/issues/31208
 # ipvsadm -l --timout
 # 修复ipvs模式下长连接timeout问题 小于900即可
 net.ipv4.tcp_keepalive_time = 600
@@ -172,14 +172,4 @@ $ sysctl --system
 ```bash
 curl https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh > check-config.sh
 bash ./check-config.sh
-```
-
-
-####  需要设定 `/etc/hosts` 解析到所有集群主机
-
-```
-192.168.88.111 k8s-m1
-192.168.88.112 k8s-m2
-192.168.88.113 k8s-m3
-192.168.88.114 k8s-n1
 ```
