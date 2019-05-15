@@ -113,7 +113,7 @@ linux-node4
 2.2 获取本项目代码，并放置在 `/srv` 目录
 
 ```bash
-[root@linux-node1 ~]# git clone https://github.com/sky-daiji/salt-k8s-ha.git
+[root@linux-node1 ~]# git clone https://github.com/sky-daiji/salt-k8s-ha-v1.git
 [root@linux-node1 ~]# cd salt-k8s-ha/
 [root@linux-node1 ~]# mv * /srv/
 [root@linux-node1 srv]# /bin/cp /srv/roster /etc/salt/roster
