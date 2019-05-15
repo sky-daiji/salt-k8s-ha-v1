@@ -8,7 +8,7 @@
 - Kernel Version: 4.18.16-1.el7.elrepo.x86_64
 - salt-ssh:     salt-ssh 2019.2.0-1
 - Kubernetes：  v1.13.6
-- Etcd:         v3.3.13
+- Etcd:         v3.3.12
 - Docker:       v18.09.2
 - Flannel：     v0.11.0
 - CNI-Plugins： v0.7.4
@@ -133,8 +133,8 @@ Kubernetes二进制文件下载地址： `https://pan.baidu.com/s/15JZp000qI0FbW
 total 0
 drwxr-xr-x 2 root root  94 Jan 18 19:19 cfssl-1.2
 drwxr-xr-x 2 root root 195 Jan 18 19:19 cni-plugins-amd64-v0.7.4
-drwxr-xr-x 3 root root 123 Jan 18 19:19 etcd-v3.3.10-linux-amd64
-drwxr-xr-x 2 root root  47 Jan 18 19:19 flannel-v0.10.0-linux-amd64
+drwxr-xr-x 3 root root 123 Jan 18 19:19 etcd-v3.3.12-linux-amd64
+drwxr-xr-x 2 root root  47 Jan 18 19:19 flannel-v0.11.0-linux-amd64
 drwxr-xr-x 3 root root  17 Jan 18 19:19 k8s-v1.13.6
 
 ```
