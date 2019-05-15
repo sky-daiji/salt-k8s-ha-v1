@@ -115,15 +115,15 @@ linux-node4
 
 ```bash
 [root@linux-node1 ~]# git clone https://github.com/sky-daiji/salt-k8s-ha-v1.git
-[root@linux-node1 ~]# cd salt-k8s-ha/
-[root@linux-node1 ~]# mv * /srv/
+[root@linux-node1 ~]# cd salt-k8s-ha-v1/
+[root@linux-node1 salt-k8s-ha-v1]# mv * /srv/
 [root@linux-node1 srv]# /bin/cp /srv/roster /etc/salt/roster
 [root@linux-node1 srv]# /bin/cp /srv/master /etc/salt/master
 ```
 
 2.4 下载二进制文件，也可以自行官方下载，为了方便国内用户访问，请在百度云盘下载,下载k8s-v1.13.6-auto.zip。
 下载完成后，将文件移动到 `/srv/salt/k8s/` 目录下，并解压，注意是 `files` 目录在 `/srv/salt/k8s/`目录下。
-Kubernetes二进制文件下载地址： `https://pan.baidu.com/s/15JZp000qI0FbWgvcc8-kMw` 提取码: `fi5y`
+Kubernetes二进制文件下载地址： `https://pan.baidu.com/s/1mkfy5liVHYGfVWKvMT7EBw` 提取码: `fc9z`
 
 ```bash
 [root@linux-node1 ~]# cd /srv/salt/k8s/
