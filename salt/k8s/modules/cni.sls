@@ -17,7 +17,7 @@ cni-dir-net:
 
 cni-default-conf:
   file.managed:
-    - name: /etc/cni/net.d/10-default.conf
+    - name: /etc/cni/net.d/10-flannel.conflist
     - source: salt://k8s/templates/cni/10-flannel.conflist.template
     - user: root
     - group: root
