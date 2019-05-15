@@ -5,7 +5,7 @@
 # Organization: skymyyyang.github.io
 # Description:  ETCD Cluster
 #******************************************
-{% set etcd_version = "etcd-v3.3.10-linux-amd64" %}
+{% set etcd_version = "etcd-v3.3.13-linux-amd64" %}
 
 include:
   - k8s.modules.base-dir
@@ -20,13 +20,13 @@ etcd-bin:
     - group: root
     - mode: 755
 
-#etcdctl-bin:
-#  file.managed:
-#    - name: /opt/kubernetes/bin/etcdctl
-#    - source: salt://k8s/files/{{ etcd_version }}/etcdctl
-#    - user: root
-#    - group: root
-#    - mode: 755
+etcdctl-bin:
+  file.managed:
+    - name: /opt/kubernetes/bin/etcdctl
+    - source: salt://k8s/files/{{ etcd_version }}/etcdctl
+    - user: root
+    - group: root
+    - mode: 755
 
 ectd-csr-json:
   file.managed:

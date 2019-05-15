@@ -8,9 +8,9 @@
 - salt-ssh:     salt-ssh 2018.3.3 (Oxygen)
 - Kubernetes：  v1.13.6
 - Etcd:         v3.3.10
-- Docker:       docker-ce-18.06.0.ce-3.el7
-- Flannel：     v0.10.0
-- CNI-Plugins： v0.7.0
+- Docker:       v18.09.2
+- Flannel：     v0.11.0
+- CNI-Plugins： v0.7.4
 
 建议部署节点：最少三个Master节点，请配置好主机名解析（必备）。以下是最小配置，否则可能不成功。
 
@@ -423,4 +423,4 @@ kube-proxy-zgg6t          1/1     Running   2          16h
 #### 如果你觉得这个项目不错，欢迎各位打赏，你的打赏是对我们的认可，是我们的动力。
 
 
-![微信支付](https://github.com/sky-daiji/salt-k8s-ha/blob/master/images/weixin.png)
+![微信支付](https://github.com/sky-daiji/salt-k8s-ha-v1/blob/master/images/weixin.png)
