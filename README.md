@@ -5,9 +5,10 @@
 
 ## 版本明细：Release-v1.13.6
 - 测试通过系统：CentOS 7.6
-- salt-ssh:     salt-ssh 2018.3.3 (Oxygen)
+- Kernel Version: 4.18.16-1.el7.elrepo.x86_64
+- salt-ssh:     salt-ssh 2019.2.0-1
 - Kubernetes：  v1.13.6
-- Etcd:         v3.3.10
+- Etcd:         v3.3.13
 - Docker:       v18.09.2
 - Flannel：     v0.11.0
 - CNI-Plugins： v0.7.4
@@ -268,24 +269,46 @@ VIP_IF: "ens32"
 ```
 注：如果执行失败，新手建议推到重来，请检查各个节点的主机名解析是否正确（监听的IP地址依赖主机名解析）。
 
-5.3 部署K8S集群
-```bash
-[root@linux-node1 ~]# salt-ssh '*' state.highstate
+5.3 部署K8S集群-Master节点
+
+这里首先安装master，由于node节点的flannel的kubeconfig配置文件依赖API-server，所以必须先要部署master节点。
+
+```Bash
+[root@linux-node1 ~]# salt-ssh -L 'linux-node1,linux-node2,linux-node3' state.sls k8s.master
 ```
-由于包比较大，这里执行时间较长，5分钟+，喝杯咖啡休息一下，如果执行有失败可以再次执行即可！
+由于包比较大，这里执行时间较长，5分钟+，喝杯咖啡休息一下，如果执行有失败可以再次执行即可！执行过程中存在cfssl生成证书的warning，大家可以忽略。
+
+5.4 部署K8S集群-Node节点
+
+```Bash
+[root@linux-node1 ~]# salt-ssh 'linux-node4' state.highstate
+```
+
+5.5 这里依然可以使用`salt-ssh '*' state.highstate`的方式部署，但是这里会有一个BUG。
+
+```bash
+ [root@linux-node1 ~]# salt-ssh '*' state.highstate
+```
+ 此时node节点的flannel会启动失败，由于salt-ssh在执行的过程中会先执行node节点，导致flannel在生成flanneld.kubeconfig的时候无法写入user和tocken。此时只需要执行以下命令即可修复此BUG。
+
+```Bash
+[root@linux-node4 ~]# /bin/bash /opt/kubernetes/bin/flannelkubeconfig.sh
+[root@linux-node4 ~]# systemctl restart flannel
+```
 
 ## 6.测试Kubernetes安装
-```
+```bash
 #先验证etcd
 [root@linux-node1 ~]# source /etc/profile
-[root@linux-node1 ~]# etcdctl --endpoints=https://192.168.150.141:2379 \
-  --ca-file=/opt/kubernetes/ssl/ca.pem \
-  --cert-file=/opt/kubernetes/ssl/etcd.pem \
-  --key-file=/opt/kubernetes/ssl/etcd-key.pem cluster-health
-[root@linux-node1 ~]# etcdctl --endpoints=https://192.168.150.141:2379 \
-  --ca-file=/opt/kubernetes/ssl/ca.pem \
-  --cert-file=/opt/kubernetes/ssl/etcd.pem \
-  --key-file=/opt/kubernetes/ssl/etcd-key.pem member list
+[root@linux-node1 ~]# etcdctl --endpoints=https://192.168.150.141:2379 cluster-health
+member 937f18b4916f332b is healthy: got healthy result from https://192.168.150.143:2379
+member d882a8adbfbb5755 is healthy: got healthy result from https://192.168.150.142:2379
+member eae26a25cb42d19f is healthy: got healthy result from https://192.168.150.141:2379
+cluster is healthy
+[root@linux-node1 ~]# etcdctl --endpoints=http://192.168.150.141:2379 member list
+937f18b4916f332b: name=etcd-node3 peerURLs=https://192.168.150.143:2380 clientURLs=https://192.168.150.143:2379 isLeader=false
+d882a8adbfbb5755: name=etcd-node2 peerURLs=https://192.168.150.142:2380 clientURLs=https://192.168.150.142:2379 isLeader=false
+eae26a25cb42d19f: name=etcd-node1 peerURLs=https://192.168.150.141:2380 clientURLs=https://192.168.150.141:2379 isLeader=true
 [root@linux-node1 ~]# kubectl get cs
 NAME                 STATUS    MESSAGE             ERROR
 controller-manager   Healthy   ok                  
